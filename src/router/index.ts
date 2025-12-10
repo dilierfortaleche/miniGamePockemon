@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PokemonView from '../views/PokemonView.vue'
+import ZoneLobby from '../views/ZoneLobby.vue' // 👈 Importamos la nueva vista
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: PokemonView
+  },
+  {
+    path: '/zones', // 👈 Nueva ruta para el mapa de zonas
+    name: 'zones',
+    component: ZoneLobby
   }
 ]
 

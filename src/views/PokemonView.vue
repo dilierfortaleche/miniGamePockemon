@@ -37,10 +37,17 @@ const pokemons = [
 ]
 
 // Estado para guardar el Pokémon seleccionado
-const selectedPokemon = ref(null)
+interface Pokemon {
+  nombre: string
+  sprite: string
+  tipo: string
+  ataques: { nombre: string; daño: number }[]
+}
+
+const selectedPokemon = ref<Pokemon | null>(null)
 
 // Función para manejar el evento select
-const handleSelect = (pokemon) => {
+const handleSelect = (pokemon: Pokemon) => { // ✅ Aquí tipamos el parámetro
   selectedPokemon.value = pokemon
 }
 </script>
@@ -80,6 +87,10 @@ const handleSelect = (pokemon) => {
         :ataques="pokemon.ataques"
         @select="handleSelect"
       />
+                <!-- Botón para ir a la página de mapas -->
+      <div class="map-button-container">
+        <RouterLink to="/zones" class="map-button">Ir al Mapa de Zonas</RouterLink>
+      </div>
     </div>
   </div>
 </template>
@@ -92,15 +103,17 @@ const handleSelect = (pokemon) => {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  height: 100vh;
   background-color: #121212;
   color: white;
-  overflow: hidden; /* Evita scroll general */
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Ajuste para pantallas pequeñas */
+  font-size: 14px;
 }
 
 .details-panel {
-  width: 80%; /* Ocupa el 80% del ancho */
-  max-width: 800px; /* Ancho máximo para pantallas grandes */
+  width: 80%;
+  max-width: 800px;
   min-height: 300px;
   border: 2px solid #444;
   border-radius: 10px;
@@ -111,7 +124,7 @@ const handleSelect = (pokemon) => {
   align-items: center;
   text-align: center;
   overflow-y: auto;
-  margin: 0 auto; /* Centra el panel horizontalmente */
+  margin: 0 auto;
 }
 
 .pokemon-details {
@@ -126,10 +139,8 @@ const handleSelect = (pokemon) => {
   width: 120px;
   height: 120px;
   object-fit: contain;
-  object-fit: contain; /* Muestra toda la imagen */
-  object-position: top left; /* ¡Aquí está la clave! */
-  background-color: #fff; /* Fondo blanco opcional */
-  margin-top: 130px;
+  object-position: top left;
+  background-color: transparent;
 }
 
 .pokemon-details h2 {
@@ -184,9 +195,31 @@ const handleSelect = (pokemon) => {
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-  margin: 0 auto; /* Centra el contenedor de tarjetas */
-  width: 80%; /* Ocupa el 80% del ancho */
-  max-width: 800px; /* Ancho máximo */
+  margin: 0 auto;
+  width: 80%;
+  max-width: 800px;
+}
+
+.map-button-container {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.map-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #42b983;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.map-button:hover {
+  background-color: #3aa876;
 }
 
 /* Responsive para pantallas pequeñas */
@@ -194,6 +227,24 @@ const handleSelect = (pokemon) => {
   .details-panel,
   .card-container {
     width: 95%;
+  }
+
+  .pokemon-details h2 {
+    font-size: 20px;
+  }
+
+  .detail-sprite {
+    width: 100px;
+    height: 100px;
+  }
+
+  .attacks h3 {
+    font-size: 14px;
+  }
+
+  .map-button {
+    padding: 8px 16px;
+    font-size: 14px;
   }
 }
 </style>
