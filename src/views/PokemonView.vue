@@ -109,6 +109,7 @@ const handleSelect = (pokemon: Pokemon) => { // ✅ Aquí tipamos el parámetro
   overflow-x: hidden;
   /* Ajuste para pantallas pequeñas */
   font-size: 14px;
+  height: 100vh; /* ← Esto fija la altura a la ventana del navegador */
 }
 
 .details-panel {
@@ -141,6 +142,7 @@ const handleSelect = (pokemon: Pokemon) => { // ✅ Aquí tipamos el parámetro
   object-fit: contain;
   object-position: top left;
   background-color: transparent;
+  margin-top: 99px;
 }
 
 .pokemon-details h2 {
