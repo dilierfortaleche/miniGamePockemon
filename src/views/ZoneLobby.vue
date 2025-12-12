@@ -66,6 +66,8 @@ const desbloquearSiguiente = (id: number) => {
   gap: 20px;
   background-color: #121212;
   color: white;
+   min-height: 100vh; /* ← Cambiado de height a min-height */
+  overflow-x: hidden; /* ← Solo ocultamos scroll horizontal */
 }
 
 .zones-container {
